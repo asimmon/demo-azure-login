@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+    tags: ["*.*.*"]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "az login"
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: "az commands"
+        run: |
+          az account show
+          pwd
