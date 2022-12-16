@@ -24,3 +24,12 @@ jobs:
         run: |
           az account show
           pwd
+
+      - name: "az logout"
+        uses: azure/CLI@v1
+        if: always()
+        with:
+          inlineScript: |
+            az logout
+            az cache purge
+            az account clear
